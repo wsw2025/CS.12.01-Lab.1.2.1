@@ -1,11 +1,11 @@
 import java.lang.reflect.Array;
 
-public class DynamicArray<T> {
+public class DynamicArray <T> {
 
     private T[] array;
     // How many elements are in the array.
     private int size;
-    private Class<T> clazz;
+    private final Class<T> clazz;
 
     public DynamicArray(Class<T> clazz) {
 
@@ -73,9 +73,7 @@ public class DynamicArray<T> {
 
     // Copy contents from current array to new array and sets previous array to new array.
     private void copyToNewArray(T[] grownArray) {
-        for (int i = 0; i < array.length; i++) {
-            grownArray[i] = array[i];
-        }
+        System.arraycopy(array, 0, grownArray, 0, array.length);
         array = grownArray;
     }
 
@@ -88,5 +86,65 @@ public class DynamicArray<T> {
         return element;
     }
 
+    public T remove(T element) {
+
+        if (!contains(element)) throw new IllegalArgumentException("Array does not contain " + element + "!");
+
+        T temp = null;
+
+        for (int i = 0; i < size; i++) {
+
+            if (array[i].equals(element)) {
+
+                temp = array[i];
+
+                for (int j = i; j < size; j++) array[j] = array[j + 1];
+                size--;
+                break;
+            }
+        }
+
+        return temp;
+
+    }
+
+    public T removeAll(T element) {
+
+        if (!contains(element)) throw new IllegalArgumentException("Array does not contain " + element + "!");
+        T temp = null;
+        for (int i = 0; i < size; i++) {
+
+            if (array[i].equals(element)) {
+
+                temp = array[i];
+
+                for (int j = i; j < size; j++) array[j] = array[j + 1];
+                size--;
+                i--;
+            }
+        }
+
+        return temp;
+    }
+
+    public void clear() {
+
+        for (int i = 0; i < size; i++) {
+            array[i] = null;
+        }
+        size = 0;
+
+    }
+
+    public boolean contains(T element) {
+
+        for (int i = 0; i < size; i++) {
+
+            if (array[i].equals(element)) return true;
+
+        }
+
+        return false;
+    }
 
 }

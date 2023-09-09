@@ -81,7 +81,7 @@ class DynamicArrayTest {
         assertEquals(2, integerDynamicArray.size());
         assertEquals(17, integerDynamicArray.get(0));
         assertEquals(16, integerDynamicArray.get(1));
-        assertEquals(null, integerDynamicArray.get(2));
+        assertNull(integerDynamicArray.get(2));
 
     }
 
@@ -121,7 +121,7 @@ class DynamicArrayTest {
         assertEquals(15, integerDynamicArray.get(0));
         assertEquals(16, integerDynamicArray.get(1));
         assertEquals(17, integerDynamicArray.get(2));
-        assertEquals(null, integerDynamicArray.get(3));
+        assertNull(integerDynamicArray.get(3));
 
     }
 
@@ -140,7 +140,7 @@ class DynamicArrayTest {
         assertEquals(16, integerDynamicArray.get(0));
         assertEquals(15, integerDynamicArray.get(1));
         assertEquals(17, integerDynamicArray.get(2));
-        assertEquals(null, integerDynamicArray.get(3));
+        assertNull(integerDynamicArray.get(3));
 
     }
 
@@ -150,7 +150,7 @@ class DynamicArrayTest {
         integerDynamicArray.set(0, 16);
         assertEquals(1, integerDynamicArray.size());
         assertEquals(16, integerDynamicArray.get(0));
-        assertEquals(null, integerDynamicArray.get(1));
+        assertNull(integerDynamicArray.get(1));
 
         integerDynamicArray.add(17);
         integerDynamicArray.add(18);
@@ -161,7 +161,7 @@ class DynamicArrayTest {
         assertEquals(16, integerDynamicArray.get(0));
         assertEquals(19, integerDynamicArray.get(1));
         assertEquals(18, integerDynamicArray.get(2));
-        assertEquals(null, integerDynamicArray.get(3));
+        assertNull(integerDynamicArray.get(3));
 
     }
 
@@ -179,7 +179,7 @@ class DynamicArrayTest {
 
     @org.junit.jupiter.api.Test
     void get() {
-        assertEquals(null, stringDynamicArray.get(0));
+        assertNull(stringDynamicArray.get(0));
         stringDynamicArray.add("Miss");
         stringDynamicArray.add("you");
         stringDynamicArray.add("Love");
@@ -187,7 +187,7 @@ class DynamicArrayTest {
         assertEquals("Miss", stringDynamicArray.get(0));
         assertEquals("you", stringDynamicArray.get(1));
         assertEquals("Love", stringDynamicArray.get(2));
-        assertEquals(null, stringDynamicArray.get(3));
+        assertNull(stringDynamicArray.get(3));
     }
 
     @org.junit.jupiter.api.Test
@@ -205,7 +205,7 @@ class DynamicArrayTest {
     }
 
     @org.junit.jupiter.api.Test
-    void remove() {
+    void removeIndex() {
 
         stringDynamicArray.add("Anna's");
         assertEquals("Anna's", stringDynamicArray.remove(0));
@@ -214,7 +214,7 @@ class DynamicArrayTest {
     }
 
     @org.junit.jupiter.api.Test
-    void removeOutOfBounds() {
+    void removeIndexOutOfBounds() {
 
         stringDynamicArray.add("Miss");
         stringDynamicArray.add("you");
@@ -225,4 +225,151 @@ class DynamicArrayTest {
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
+
+    @org.junit.jupiter.api.Test
+    void removeElement() {
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        assertEquals("Miss", stringDynamicArray.remove("Miss"));
+        assertEquals(2, stringDynamicArray.size());
+        assertEquals("you", stringDynamicArray.get(0));
+        assertEquals("Love", stringDynamicArray.get(1));
+        assertNull(stringDynamicArray.get(2));
+    }
+
+    @org.junit.jupiter.api.Test
+    void removeElementTwo() {
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+        stringDynamicArray.add("and");
+        stringDynamicArray.add("I");
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("and");
+        stringDynamicArray.add("I");
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        assertEquals(12, stringDynamicArray.size());
+        assertEquals("Miss", stringDynamicArray.remove("Miss"));
+        assertEquals(11, stringDynamicArray.size());
+
+        assertEquals("you", stringDynamicArray.get(0));
+        assertEquals("Love", stringDynamicArray.get(1));
+        assertEquals("and", stringDynamicArray.get(2));
+        assertEquals("I", stringDynamicArray.get(3));
+        assertEquals("Miss", stringDynamicArray.get(4));
+        assertEquals("you", stringDynamicArray.get(5));
+        assertEquals("and", stringDynamicArray.get(6));
+        assertEquals("I", stringDynamicArray.get(7));
+        assertEquals("Miss", stringDynamicArray.get(8));
+        assertEquals("you", stringDynamicArray.get(9));
+        assertEquals("Love", stringDynamicArray.get(10));
+
+
+    }
+
+    @org.junit.jupiter.api.Test
+    void removeElementAll() {
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+        stringDynamicArray.add("and");
+        stringDynamicArray.add("I");
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("and");
+        stringDynamicArray.add("I");
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        assertEquals(12, stringDynamicArray.size());
+        assertEquals("Miss", stringDynamicArray.removeAll("Miss"));
+        assertEquals(9, stringDynamicArray.size());
+
+        assertEquals("you", stringDynamicArray.get(0));
+        assertEquals("Love", stringDynamicArray.get(1));
+        assertEquals("and", stringDynamicArray.get(2));
+        assertEquals("I", stringDynamicArray.get(3));
+        assertEquals("you", stringDynamicArray.get(4));
+        assertEquals("and", stringDynamicArray.get(5));
+        assertEquals("I", stringDynamicArray.get(6));
+        assertEquals("you", stringDynamicArray.get(7));
+        assertEquals("Love", stringDynamicArray.get(8));
+
+
+    }
+
+    @org.junit.jupiter.api.Test
+    void containsTrue() {
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        assertTrue(stringDynamicArray.contains("Miss"));
+        assertTrue(stringDynamicArray.contains("you"));
+        assertTrue(stringDynamicArray.contains("Love"));
+    }
+
+    @org.junit.jupiter.api.Test
+    void containsFalse() {
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        assertFalse(stringDynamicArray.contains("miss"));
+        assertFalse(stringDynamicArray.contains("You"));
+        assertFalse(stringDynamicArray.contains("love"));
+    }
+
+    @org.junit.jupiter.api.Test
+    void clear() {
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+        stringDynamicArray.add("and");
+        stringDynamicArray.add("I");
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("and");
+        stringDynamicArray.add("I");
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        assertEquals(12, stringDynamicArray.size());
+        assertFalse(stringDynamicArray.isEmpty());
+
+        stringDynamicArray.clear();
+
+        assertEquals(0, stringDynamicArray.size());
+        assertTrue(stringDynamicArray.isEmpty());
+
+        assertNull(stringDynamicArray.get(0));
+        assertNull(stringDynamicArray.get(1));
+        assertNull(stringDynamicArray.get(2));
+        assertNull(stringDynamicArray.get(3));
+        assertNull(stringDynamicArray.get(4));
+        assertNull(stringDynamicArray.get(5));
+        assertNull(stringDynamicArray.get(6));
+        assertNull(stringDynamicArray.get(7));
+        assertNull(stringDynamicArray.get(8));
+        assertNull(stringDynamicArray.get(9));
+        assertNull(stringDynamicArray.get(10));
+        assertNull(stringDynamicArray.get(11));
+
+    }
+
+
 }
