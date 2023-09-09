@@ -371,5 +371,46 @@ class DynamicArrayTest {
 
     }
 
+    @org.junit.jupiter.api.Test
+    void testGrow() {
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        stringDynamicArray.add("Miss");
+        stringDynamicArray.add("you");
+        stringDynamicArray.add("Love");
+
+        assertEquals("Miss", stringDynamicArray.get(0));
+        assertEquals("you", stringDynamicArray.get(1));
+        assertEquals("Love", stringDynamicArray.get(2));
+
+        assertEquals("Miss", stringDynamicArray.get(3));
+        assertEquals("you", stringDynamicArray.get(4));
+        assertEquals("Love", stringDynamicArray.get(5));
+
+        assertEquals("Miss", stringDynamicArray.get(6));
+        assertEquals("you", stringDynamicArray.get(7));
+        assertEquals("Love", stringDynamicArray.get(8));
+
+        assertEquals("Miss", stringDynamicArray.get(9));
+        assertEquals("you", stringDynamicArray.get(10));
+        assertEquals("Love", stringDynamicArray.get(11));
+
+        assertEquals(12, stringDynamicArray.size());
+
+        assertNull(stringDynamicArray.get(12));
+
+    }
+
 
 }
